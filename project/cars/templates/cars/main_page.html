@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .header button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .header button:hover {
+            background-color: #0056b3;
+        }
+        .main-content {
+            text-align: center;
+        }
+        .main-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .main-content button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .main-content button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-content">
+    <h1>Добро пожаловать!</h1>
+    <p>Это главная страница нашего приложения.</p>
+    <button onclick="window.location.href='{% url 'cars:cars' %}'">Перейти к списку автомобилей</button>
+</div>
+
+</body>
+</html>

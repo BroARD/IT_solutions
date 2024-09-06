@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автомобиль</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .comments-section {
+            width: 100%;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .comments-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .comment-form textarea {
+            resize: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .comment-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Название автомобиля: {{ car.make }} {{ car.model }}</h1>
+    <p>Год выпуска: {{car.year}}</p>
+    <p>Описание: {{car.description}}</p>
+</div>
+
+<div class="comments-section">
+    <h2>Комментарии</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <strong>{{comment.author}}:</strong> {{comment.content}}
+        </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <form class="comment-form" action="{% url 'cars:car' car.id%}" method="post">
+        {% csrf_token %}
+        <label for="{{ form.content.id_for_label }}" >Cообщение</label>
+        {{form.content}}
+        <button type="submit">Отправить комментарий</button>
+    </form>
+    {% endif %}
+</div>
+
+
+</body>
+</html>

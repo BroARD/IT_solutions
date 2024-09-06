@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование параметров автомобиля</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .edit-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="edit-container">
+    <h1>Редактирование автомобиля</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="make">Марка:</label>
+        <input type="text" name="make" value="{{ car.make }}" required><br>
+
+        <label for="model">Модель:</label>
+        <input type="text" name="model" value="{{ car.model }}" required><br>
+
+        <label for="year">Год выпуска:</label>
+        <input type="number" name="year" value="{{ car.year }}" required><br>
+
+        <label for="description">Описание:</label>
+        <textarea name="description" required>{{ car.description }}</textarea><br>
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <a href="{% url 'cars:delete_car' car.id %}"><button style="margin-top:10px; background-color:red">Удалить машину</button></a>
+</div>
+
+</body>
+</html>
