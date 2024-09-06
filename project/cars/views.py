@@ -72,5 +72,6 @@ def edit_car(request, car_id):
 
 
 def delete_car(request, car_id):
-    Car.objects.get(id=car_id).delete()
+    if request.user == Car.objects.get(id=car_id).owner:
+        Car.objects.get(id=car_id).delete()
     return HttpResponseRedirect(reverse('cars:cars'))
