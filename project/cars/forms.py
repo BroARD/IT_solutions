@@ -1,6 +1,7 @@
 from django import forms
 from .models import Car, Comment
 
+#Форма создания нового автомобиля
 class CarForm(forms.ModelForm):
     make = forms.CharField(widget=forms.TextInput(attrs={
         'id': "make", 'placeholder': "Марка"
@@ -19,7 +20,7 @@ class CarForm(forms.ModelForm):
         model = Car
         fields = ('make', 'model', 'year', 'description')
 
-
+#Форма написания нового комментария
 class CommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Оставьте ваш комментарий...', 'rows':'4'

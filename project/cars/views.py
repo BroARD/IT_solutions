@@ -8,10 +8,11 @@ from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
 
+#Главная страница
 class MainPageView(TemplateView):
     template_name = 'cars/main_page.html'
 
-
+#Список всех автомобилей с формай для добавления нового, при условии что вы авторизованы
 class CarsListView(CreateView):
     model = Car
     template_name = 'cars/cars_list.html'
@@ -30,7 +31,7 @@ class CarsListView(CreateView):
         return super(CarsListView, self).form_valid(form)
 
 
-
+#Контроллер просмотра профиля автомобиля и комментариев к нему.
 class CarView(CreateView):
     model = Car
     template_name = 'cars/car.html'
@@ -53,6 +54,7 @@ class CarView(CreateView):
     def get_success_url(self):
         return reverse_lazy('cars:car', kwargs={'car_id': self.kwargs.get('car_id')})
 
+#Редактирование автомобиля, если вы его владелец
 @login_required
 def edit_car(request, car_id):
     car = Car.objects.get(id=car_id)
@@ -70,7 +72,8 @@ def edit_car(request, car_id):
 
     return render(request, 'cars/car_edit.html', {'car': car})
 
-
+#Удаления автомобиля, если вы его владелец
+@login_required
 def delete_car(request, car_id):
     if request.user == Car.objects.get(id=car_id).owner:
         Car.objects.get(id=car_id).delete()

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+#Модель автомобиля
 class Car(models.Model):
     make = models.CharField(max_length=16, verbose_name='make')
     model = models.CharField(max_length=16, verbose_name='model')
@@ -15,7 +16,7 @@ class Car(models.Model):
     def __str__(self):
         return f'Owner: {self.owner}, {self.make} {self.model}'
 
-
+#Модель комментария
 class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

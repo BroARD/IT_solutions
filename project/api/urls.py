@@ -6,10 +6,10 @@ from api.views.api_view import CarViewSet, CommentViewSet
 app_name = 'api'
 
 router = DefaultRouter()
-router.register(r'cars', CarViewSet)
-router.register(r'cars/(?P<car_id>[^/.]+)/comments', CommentViewSet, basename='car-comments')
+router.register(r'cars', CarViewSet) #Регистрация ссылок для машин
+router.register(r'cars/(?P<car_id>[^/.]+)/comments', CommentViewSet, basename='car-comments') #Регистрация ссылок для комментариев
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", include(router.urls)),
+    path('admin/', admin.site.urls), #Ссылка на админку
+    path("", include(router.urls)), #Ссылки на все ссылки router
 ]
